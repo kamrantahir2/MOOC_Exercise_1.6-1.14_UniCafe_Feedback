@@ -13,6 +13,21 @@ const Header = () => {
   );
 };
 
+const StatisticsLine = ({ text, value, ending }) => {
+  return (
+    // <p>
+    //   {text} {value}
+    //   {ending}
+    // </p>
+    <tr>
+      <td>{text}</td>
+      <td>
+        {value} {ending}
+      </td>
+    </tr>
+  );
+};
+
 const Statistics = ({ good, neutral, bad, count, average, positive }) => {
   if (count === 0) {
     return (
@@ -24,17 +39,23 @@ const Statistics = ({ good, neutral, bad, count, average, positive }) => {
   }
 
   return (
-    <div>
-      <h1>Statistics</h1>
-      <div>
-        <p>Good: {good}</p>
-        <p>Neutral: {neutral}</p>
-        <p>Bad: {bad}</p>
-        <p>All: {count}</p>
-        <p>Average: {average}</p>
-        <p>Positive: {positive}%</p>
-      </div>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            <h1>Statistics</h1>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <StatisticsLine text="Good :" value={good} />
+        <StatisticsLine text="Neutral :" value={neutral} />
+        <StatisticsLine text="Bad :" value={bad} />
+        <StatisticsLine text="All :" value={count} />
+        <StatisticsLine text="Average: " value={average} />
+        <StatisticsLine text="Positive :" value={positive} ending="%" />
+      </tbody>
+    </table>
   );
 };
 
