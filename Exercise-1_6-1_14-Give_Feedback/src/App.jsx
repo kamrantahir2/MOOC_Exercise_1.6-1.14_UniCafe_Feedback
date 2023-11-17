@@ -31,13 +31,17 @@ function App() {
   };
 
   const addNeutral = () => {
-    setNeutral(neutral + 1);
+    setNeutral((prev) => prev + 1);
+    console.log("neutral", neutral);
     setCount(count + 1);
+    console.log("count in neutral", neutral);
   };
 
   const addBad = () => {
     setBad(bad + 1);
+    console.log("bad", bad);
     setCount(count + 1);
+    console.log("count in bad", bad);
   };
 
   // const calculateAverage = () => {
