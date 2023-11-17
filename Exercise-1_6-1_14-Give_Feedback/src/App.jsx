@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 const Button = ({ handleClick, text }) => {
@@ -23,11 +23,8 @@ function App() {
   const addGood = () => {
     const added = good + 1;
     setGood((prev) => prev + 1);
-    console.log("AddGood good:", good);
     const countAdded = count + 1;
     setCount(countAdded);
-    console.log("AddGood count:", count);
-    // calculateAverage();
   };
 
   const addNeutral = () => {
@@ -44,25 +41,19 @@ function App() {
     console.log("count in bad", bad);
   };
 
-  // const calculateAverage = () => {
-  //   const goodValue = good * 1;
-  //   const neutralValue = neutral * 0;
-  //   const badValue = bad * -1;
+  const calculateAverage = () => {
+    const goodValue = good * 1;
+    const neutralValue = neutral * 0;
+    const badValue = bad * -1;
+    const total = goodValue + neutralValue + badValue;
+    const calculated = total / count;
 
-  //   const total = goodValue + neutralValue + badValue;
+    setAverage(calculated);
+  };
 
-  //   console.log("goodValue", goodValue);
-
-  //   console.log("Total", total);
-
-  //   console.log("Count", count);
-
-  //   const calculated = total / count;
-
-  //   setAverage(calculated);
-
-  //   console.log("Average", average);
-  // };
+  useEffect(() => {
+    calculateAverage();
+  }, [good, bad, neutral]);
 
   return (
     <>
