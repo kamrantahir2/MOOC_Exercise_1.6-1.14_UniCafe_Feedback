@@ -13,12 +13,29 @@ const Header = () => {
   );
 };
 
+const Statistics = ({ good, neutral, bad, count, average, positive }) => {
+  return (
+    <div>
+      <h1>Statistics</h1>
+      <div>
+        <p>Good: {good}</p>
+        <p>Neutral: {neutral}</p>
+        <p>Bad: {bad}</p>
+        <p>All: {count}</p>
+        <p>Average: {average}</p>
+        <p>Positive: {positive}%</p>
+      </div>
+    </div>
+  );
+};
+
 function App() {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
   const [count, setCount] = useState(0);
   const [average, setAverage] = useState(0);
+  const [positive, setPositive] = useState(0);
 
   const addGood = () => {
     const added = good + 1;
@@ -51,8 +68,14 @@ function App() {
     setAverage(calculated);
   };
 
+  const calculatePositive = () => {
+    const calculated = (good / count) * 100;
+    setPositive(calculated);
+  };
+
   useEffect(() => {
     calculateAverage();
+    calculatePositive();
   }, [good, bad, neutral]);
 
   return (
@@ -67,14 +90,14 @@ function App() {
         </div>
 
         <div>
-          <h1>Statistics</h1>
-          <div>
-            <p>Good: {good}</p>
-            <p>Neutral: {neutral}</p>
-            <p>Bad: {bad}</p>
-            <p>All: {count}</p>
-            <p>Average: {average}</p>
-          </div>
+          <Statistics
+            good={good}
+            bad={bad}
+            neutral={neutral}
+            average={average}
+            positive={positive}
+            count={count}
+          />
         </div>
       </div>
     </>
